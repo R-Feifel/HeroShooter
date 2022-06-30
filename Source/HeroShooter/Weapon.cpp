@@ -2,6 +2,7 @@
 
 
 #include "Weapon.h"
+#include "RobotCharacter.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
@@ -25,15 +26,6 @@ void AWeapon::PullTrigger()
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("MuzzleFlash"));
 	UGameplayStatics::SpawnSoundAttached(MuzzleSound, Mesh, TEXT("MuzzleFlash"));
 
-	// if (FireAnimation != nullptr)
-	// {
-	// 	UAnimInstance* AnimInstance = Character->GetAnimInstance();
-	// 	if (AnimInstance != nullptr)
-	// 	{
-	// 		AnimInstance->Montage_Play(FireAnimation, 1.f);
-	// 	}
-	// }
-
 	FHitResult Hit;
 	FVector ShotDirection;
 	bool bSuccess = GunTrace(Hit, ShotDirection);
@@ -50,20 +42,6 @@ void AWeapon::PullTrigger()
 		}
 
 	}
-}
-
-// Called when the game starts or when spawned
-void AWeapon::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
-
-// Called every frame
-void AWeapon::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
 }
 
 bool AWeapon::GunTrace(FHitResult& Hit, FVector& ShotDirection)
